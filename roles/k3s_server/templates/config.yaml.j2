@@ -1,0 +1,8 @@
+---
+disable:
+  - servicelb
+  - traefik
+tls-san:
+  - "{{ k3s_node_ip }}"
+flannel-iface: "{{ flannel_iface }}"
+node-ip: "{{ k3s_node_ip }}"

@@ -1,6 +1,6 @@
 ---
 - name: Create manifests directory on first master
-  file:
+  ansible.builtin.file:
     path: /var/lib/rancher/k3s/server/manifests
     state: directory
     owner: root
@@ -8,7 +8,7 @@
     mode: 0644
   when: ansible_hostname == hostvars[groups[group_name_master | default('master')][0]]['ansible_hostname']
 
-- name: Download vip rbac manifest to first master
+- name: Download VIP RBAC manifest to first master
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/kube-vip/kube-vip/{{ kube_vip_tag_version }}/docs/manifests/rbac.yaml"
     dest: "/var/lib/rancher/k3s/server/manifests/vip-rbac.yaml"
@@ -18,7 +18,7 @@
   when: ansible_hostname == hostvars[groups[group_name_master | default('master')][0]]['ansible_hostname']
 
 - name: Copy vip manifest to first master
-  template:
+  ansible.builtin.template:
     src: "vip.yaml.j2"
     dest: "/var/lib/rancher/k3s/server/manifests/vip.yaml"
     owner: root
