@@ -3,6 +3,6 @@ disable:
   - servicelb
   - traefik
 tls-san:
-  - "{{ k3s_node_ip }}"
+  - "{{ apiserver_endpoint }}"
 flannel-iface: "{{ flannel_iface }}"
 node-ip: "{{ k3s_node_ip }}"
