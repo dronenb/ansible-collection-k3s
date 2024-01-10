@@ -6,3 +6,5 @@ tls-san:
   - "{{ apiserver_endpoint }}"
 flannel-iface: "{{ flannel_iface }}"
 node-ip: "{{ k3s_node_ip }}"
+node-label:
+  - "smarter-device-manager=enabled"
