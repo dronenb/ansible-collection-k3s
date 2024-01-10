@@ -115,6 +115,28 @@
     path: /var/lib/rancher/k3s/server
     mode: "{{ p.stat.mode }}"
 
+- name: Create /etc/cni directory
+  ansible.builtin.file:
+    path: /etc/cni
+    state: directory
+
+- name: Create /opt/cni/ directory
+  ansible.builtin.file:
+    path: /opt/cni
+    state: directory
+
+- name: Create net.d symlink for multus
+  ansible.builtin.file:
+    src: /var/lib/rancher/k3s/agent/etc/cni/net.d
+    dest: /etc/cni/net.d
+    state: link
+
+- name: Create cni/bin symlink for multus
+  ansible.builtin.file:
+    src: /var/lib/rancher/k3s/data/current/bin
+    dest: /opt/cni/bin
+    state: link
+
 - name: Create directory .kube
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.kube"
